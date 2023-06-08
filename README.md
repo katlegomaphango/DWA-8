@@ -1,7 +1,7 @@
 # DWA_08.3 Challenge 1
 
 ## Project Description
-In this Challenge, you will continue with your (“Book Connect”)[https://github.com/katlegomaphango/DWA-7] codebase, and further iterate on your abstractions. You will be required to create an encapsulated abstraction of the book preview by means of a single factory function. If you are up for it you can also encapsulate other aspects of the app into their own abstractions.
+In this Challenge, you will continue with your [“Book Connect”](https://github.com/katlegomaphango/DWA-7) codebase, and further iterate on your abstractions. You will be required to create an encapsulated abstraction of the book preview by means of a single factory function. If you are up for it you can also encapsulate other aspects of the app into their own abstractions.
 
 
 Previously, you worked on adding abstraction around the book preview functionality of the project. You must turn the book preview abstraction into a fully-working web component. Use the techniques you’ve learned about this module and apply them to the book preview.
