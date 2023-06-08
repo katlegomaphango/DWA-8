@@ -3,7 +3,7 @@ import { books, authors, genres, BOOKS_PER_PAGE, html } from './data.js'
 let page = 1;
 let matches = books
 
-const createHtmlElement = (itemsArray) => {
+const createBookPreview = (itemsArray) => {
     const newItems = document.createDocumentFragment()
 
     for (const { author, id, image, title } of itemsArray) {
@@ -29,7 +29,7 @@ const createHtmlElement = (itemsArray) => {
     return newItems
 }
 
-html.list.items.appendChild(createHtmlElement(matches))
+html.list.items.appendChild(createBookPreview(matches))
 
 html.search.populateDropDown(html.search.genres, 'Genres', genres)
 html.search.populateDropDown(html.search.authors, 'Authors', authors)
@@ -140,7 +140,7 @@ html.search.form.addEventListener('submit', (event) => {
 
     html.list.items.innerHTML = ''
 
-    html.list.items.appendChild(createHtmlElement(matches.slice(0, BOOKS_PER_PAGE)))
+    html.list.items.appendChild(createBookPreview(matches.slice(0, BOOKS_PER_PAGE)))
 
     updateShowMoreBtn(matches, 1)
 
@@ -153,7 +153,7 @@ html.list.button.addEventListener('click', () => {
 
     html.list.button.innerText = `Show more (${extracted.length})`
 
-    html.list.items.appendChild(createHtmlElement(extracted))
+    html.list.items.appendChild(createBookPreview(extracted))
 })
 
 const findBookNode = (event) => {
