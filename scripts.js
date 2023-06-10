@@ -1,4 +1,4 @@
-import { books, authors, genres, BOOKS_PER_PAGE, html } from './data.js'
+import { books, authors, genres, BOOKS_PER_PAGE, html } from './modules/data.js'
 
 let page = 1;
 let matches = books
