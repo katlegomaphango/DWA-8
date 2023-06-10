@@ -1,52 +1,14 @@
 import { books, authors, genres, BOOKS_PER_PAGE, html } from './modules/data.js'
+import { populateDropDown, createBookPreview, updateShowMoreBtn } from './modules/updateHtml.js'
+import { findBookNode, filterBookArray, setThemeProperty } from './modules/helpers.js';
 
 let page = 1;
 let matches = books
 
-const createBookPreview = (itemsArray) => {
-    const newItems = document.createDocumentFragment()
+html.list.items.appendChild(createBookPreview(matches, authors))
 
-    for (const { author, id, image, title } of itemsArray) {
-        const element = document.createElement('button')
-        element.classList = 'preview'
-        element.setAttribute('data-preview', id)
-    
-        element.innerHTML = `
-            <img
-                class="preview__image"
-                src="${image}"
-            />
-            
-            <div class="preview__info">
-                <h3 class="preview__title">${title}</h3>
-                <div class="preview__author">${authors[author]}</div>
-            </div>
-        `
-
-        newItems.appendChild(element)
-    }
-
-    return newItems
-}
-
-html.list.items.appendChild(createBookPreview(matches))
-
-html.search.populateDropDown(html.search.genres, 'Genres', genres)
-html.search.populateDropDown(html.search.authors, 'Authors', authors)
-
-/**
- * Function that sets the app theme property
- * @param {string} theme - string theme you want to set
- */
-const setThemeProperty = (theme) => {
-    if(theme === 'night') {
-        document.documentElement.style.setProperty('--color-dark', html.theme.night.dark);
-        document.documentElement.style.setProperty('--color-light', html.theme.night.light);
-    } else {
-        document.documentElement.style.setProperty('--color-dark', html.theme.day.dark);
-        document.documentElement.style.setProperty('--color-light', html.theme.day.light);
-    }
-}
+populateDropDown(html.search.genres, 'Genres', genres)
+populateDropDown(html.search.authors, 'Authors', authors)
 
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     html.theme.settings_theme.value = 'night'
@@ -54,16 +16,6 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 } else {
     html.theme.settings_theme.value = 'day'
     setThemeProperty('day')
-}
-
-const updateShowMoreBtn = (bookArray, minBooks) => {
-    html.list.button.innerText = `Show more (${bookArray.length - (page * BOOKS_PER_PAGE)})`
-    html.list.button.disabled = (bookArray.length - (page * BOOKS_PER_PAGE)) < minBooks
-
-    html.list.button.innerHTML = `
-        <span>Show more</span>
-        <span class="list__remaining"> (${(bookArray.length - (page * BOOKS_PER_PAGE)) > 0 ? (bookArray.length - (page * BOOKS_PER_PAGE)) : 0})</span>
-    `
 }
 
 updateShowMoreBtn(matches, 0)
@@ -101,29 +53,6 @@ html.theme.settings_form.addEventListener('submit', (event) => {
     html.theme.overlay.open = false
 })
 
-const filterBookArray = (filters) => {
-    const result = []
-
-    for (const book of books) {
-        let genreMatch = filters.genre === 'any'
-
-        for (const singleGenre of book.genres) {
-            if (genreMatch) break;
-            if (singleGenre === filters.genre) { genreMatch = true }
-        }
-
-        if (
-            (filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase())) && 
-            (filters.author === 'any' || book.author === filters.author) && 
-            genreMatch
-        ) {
-            result.push(book)
-        }
-    }
-
-    return result
-}
-
 html.search.form.addEventListener('submit', (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -156,27 +85,6 @@ html.list.button.addEventListener('click', () => {
     html.list.items.appendChild(createBookPreview(extracted))
 })
 
-const findBookNode = (event) => {
-    const pathArray = Array.from(event.path || event.composedPath())
-    let activeNode = null
-
-    for (const node of pathArray) {
-        if (activeNode) break
-
-        if (node?.dataset?.preview) {
-            let result = null
-    
-            for (const singleBook of books) {
-                if (result) break;
-                if (singleBook.id === node?.dataset?.preview) result = singleBook
-            } 
-        
-            activeNode = result
-        }
-    }
-
-    return activeNode
-}
 const bookSummaryHandler = (event) => {
     let active = findBookNode(event)
     

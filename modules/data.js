@@ -25419,30 +25419,6 @@ export const books = [
 ]
 
 /**
- * populates a drop down list
- * 
- * @param {HTMLElement} DropDownElement 
- * @param {string} DropDownName
- * @param {object} dataObject 
- */
-const populateDropDown = (DropDownElement, DropDownName, dataObject) => {
-    const generateHtml = document.createDocumentFragment()
-    const firstElement = document.createElement('option')
-    firstElement.value = 'any'
-    firstElement.innerText = `All ${DropDownName}`
-    generateHtml.appendChild(firstElement)
-
-    for (const [id, name] of Object.entries(dataObject)) {
-        const element = document.createElement('option')
-        element.value = id
-        element.innerText = name
-        generateHtml.appendChild(element)
-    }
-
-    DropDownElement.appendChild(generateHtml)
-}
-
-/**
  * An object literal that contains references to all the HTML elements
  * referenced through the operation of the app either upon initialization or
  * while its running (via event listeners). This ensure that all UI elements can
@@ -25455,14 +25431,6 @@ export const html = {
         settings_cancel: document.querySelector('[data-settings-cancel]'),
         settings_form: document.querySelector('[data-settings-form]'),
         overlay: document.querySelector('[data-settings-overlay]'),
-        day: {
-            dark: '10, 10, 20',
-            light: '255, 255, 255',
-        },
-        night: {
-            dark: '255, 255, 255',
-            light: '10, 10, 20',
-        }
     },
     list: {
         items: document.querySelector('[data-list-items]'),
@@ -25477,7 +25445,6 @@ export const html = {
         cancel: document.querySelector('[data-search-cancel]'),
         overlay: document.querySelector('[data-search-overlay]'),
         title: document.querySelector('[data-search-title]'),
-        populateDropDown: populateDropDown,
     },
     summary: {
         active: document.querySelector('[data-list-active]'),
