@@ -24,7 +24,13 @@ export const findBookNode = (event) => {
     return activeNode
 }
 
-export const filterBookArray = (filters) => {
+/**
+ * 
+ * @param {object} filters 
+ * @param {object} books 
+ * @returns {Array}
+ */
+export const filterBookArray = (filters, books) => {
     const result = []
 
     for (const book of books) {

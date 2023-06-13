@@ -59,7 +59,7 @@ html.search.form.addEventListener('submit', (event) => {
     const filters = Object.fromEntries(formData)
 
     page = 1;
-    matches = filterBookArray(filters)
+    matches = filterBookArray(filters, matches)
 
     if (matches.length < 1) {
         html.list.message.classList.add('list__message_show')
@@ -69,7 +69,7 @@ html.search.form.addEventListener('submit', (event) => {
 
     html.list.items.innerHTML = ''
 
-    html.list.items.appendChild(createBookPreview(matches.slice(0, BOOKS_PER_PAGE)))
+    html.list.items.appendChild(createBookPreview(matches.slice(0, BOOKS_PER_PAGE), authors))
 
     updateShowMoreBtn(matches, page)
 
