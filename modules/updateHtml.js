@@ -24,6 +24,12 @@ export const populateDropDown = (DropDownElement, DropDownName, dataObject) => {
     DropDownElement.appendChild(generateHtml)
 }
 
+/**
+ * Creates a book preview fragment
+ * @param {Array} itemsArray - An array of books
+ * @param {Object} authorsObj - Authors Object
+ * @returns {DocumentFragment}
+ */
 export const createBookPreview = (itemsArray, authorsObj) => {
     const newItems = document.createDocumentFragment()
 
