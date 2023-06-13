@@ -18,7 +18,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     setThemeProperty('day')
 }
 
-updateShowMoreBtn(matches, 0)
+updateShowMoreBtn(matches,page)
 page += 1
 
 
@@ -71,7 +71,7 @@ html.search.form.addEventListener('submit', (event) => {
 
     html.list.items.appendChild(createBookPreview(matches.slice(0, BOOKS_PER_PAGE)))
 
-    updateShowMoreBtn(matches, 1)
+    updateShowMoreBtn(matches, page)
 
     window.scrollTo({top: 0, behavior: 'smooth'});
     html.search.overlay.open = false

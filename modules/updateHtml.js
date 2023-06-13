@@ -1,4 +1,4 @@
-import { html } from "./data.js"
+import { html, BOOKS_PER_PAGE } from "./data.js"
 
 /**
  * populates a drop down list
@@ -56,12 +56,17 @@ export const createBookPreview = (itemsArray, authorsObj) => {
     return newItems
 }
 
-export const updateShowMoreBtn = (bookArray, page, minBooks, booksPerPage) => {
-    html.list.button.innerText = `Show more (${bookArray.length - (page * booksPerPage)})`
-    html.list.button.disabled = (bookArray.length - (page * booksPerPage)) < minBooks
+/**
+ * 
+ * @param {Array} bookArray 
+ * @param {Number} page 
+ */
+export const updateShowMoreBtn = (bookArray, page) => {
+    html.list.button.innerText = `Show more (${bookArray.length - (page * BOOKS_PER_PAGE)})`
+    html.list.button.disabled = (bookArray.length - (page * BOOKS_PER_PAGE)) < 1
 
     html.list.button.innerHTML = `
         <span>Show more</span>
-        <span class="list__remaining"> (${(bookArray.length - (page * booksPerPage)) > 0 ? (bookArray.length - (page * booksPerPage)) : 0})</span>
+        <span class="list__remaining"> (${(bookArray.length - (page * BOOKS_PER_PAGE)) > 0 ? (bookArray.length - (page * BOOKS_PER_PAGE)) : 0})</span>
     `
 }
