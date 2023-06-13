@@ -3,9 +3,9 @@ import { html } from "./data.js"
 /**
  * populates a drop down list
  * 
- * @param {HTMLElement} DropDownElement 
- * @param {string} DropDownName
- * @param {object} dataObject 
+ * @param {HTMLElement} DropDownElement - Html element you append the drop down to
+ * @param {string} DropDownName 
+ * @param {object} dataObject - The object will all the data you want to add to the drop down
  */
 export const populateDropDown = (DropDownElement, DropDownName, dataObject) => {
     const generateHtml = document.createDocumentFragment()
