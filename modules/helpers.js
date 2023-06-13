@@ -53,6 +53,9 @@ export const filterBookArray = (filters, books) => {
     return result
 }
 
+/**
+ * An object with the theme setting for day and night
+ */
 const themeObj = {
     day: {
         dark: '10, 10, 20',
