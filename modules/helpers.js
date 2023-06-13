@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param {Event} event 
+ * @returns {Node}
+ */
 export const findBookNode = (event) => {
     const pathArray = Array.from(event.path || event.composedPath())
     let activeNode = null
@@ -16,7 +21,6 @@ export const findBookNode = (event) => {
             activeNode = result
         }
     }
-
     return activeNode
 }
 
